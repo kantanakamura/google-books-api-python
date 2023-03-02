@@ -1,22 +1,18 @@
 import json
 # Python's built-in module for opening and reading URLs
-from PIL import Image
 from urllib.request import urlopen
 
 
-api = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
-isbn = input('Enter 10 digit ISBN: ').strip()
 
-# send a request and get a JSON response
-response = urlopen(api + isbn)
-# parse JSON into Python as a dictionary
-book_data = json.load(response)
+def main(url):
+    # send a request and get a JSON response
+    response = urlopen(url)
+    # parse JSON into Python as a dictionary
+    book_data = json.load(response)
 
 
-total_items = book_data['totalItems']
-for i in range(total_items):
-    volume_info = book_data['items'][i]['volumeInfo']
-    search_info = book_data['items'][i]['searchInfo']
+    volume_info = book_data['items'][0]['volumeInfo']
+    search_info = book_data['items'][0]['searchInfo']
     image_link = volume_info['imageLinks']
     author = volume_info['authors']
 
@@ -31,3 +27,8 @@ for i in range(total_items):
     print("\n***\n")
 
 
+if __name__ == '__main__':
+    # sample ISBN for testing: 1593276036
+    api = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
+    isbn = input('Enter 10 digit ISBN: ').strip()
+    main(api+isbn)
