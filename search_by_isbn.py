@@ -3,13 +3,11 @@ import json
 from urllib.request import urlopen
 
 
-
 def main(url):
     # send a request and get a JSON response
     response = urlopen(url)
     # parse JSON into Python as a dictionary
     book_data = json.load(response)
-
 
     volume_info = book_data['items'][0]['volumeInfo']
     search_info = book_data['items'][0]['searchInfo']
