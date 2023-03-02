@@ -33,4 +33,3 @@ def url_generation():
     return url
 
 
-print(url_generation())
