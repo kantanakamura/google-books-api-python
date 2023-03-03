@@ -20,7 +20,11 @@ def pprint(book_data):
         description = info.get('description')
         language = info.get('language')
         image = info.get('imageLinks')
-        image_link = image.get('thumbnail')
+        if image is not None:
+            image_link = image.get('thumbnail')
+        else:
+            image_link = None
+
 
         print('タイトル：', title)
         print('著者：', author)

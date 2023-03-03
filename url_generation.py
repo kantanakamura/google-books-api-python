@@ -7,8 +7,9 @@ search = {
     'isbn': '',
     'lccn': '',
     'oclc': '',
+    'resurlt_num': 40, # Values must be within the range 40
     'language': 'ja',
-    'sort': '',
+    'sort': 'newest',
 }
 
 def url_q():
@@ -25,11 +26,13 @@ def url_q():
 
 def url_generation():
     base_url = 'https://www.googleapis.com/books/v1/volumes?'
+    url_num = 'maxResults=' + str(search['resurlt_num'])
     url_lnag = '' if search['language'] == '' else 'langRestrict='+search['language']
     url_sort = '' if search['sort'] == '' else 'orderBy='+search['sort']
-    url_list = [url_q(), url_lnag, url_sort]
+    url_list = [url_q(), url_num, url_lnag, url_sort]
     url_list_none = list(filter(None, url_list))
     url = base_url + '&'.join(url_list_none)
+    print(url)
     return url
 
 
